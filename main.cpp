@@ -20,15 +20,31 @@ int main()
 	// 무기를 선택하는 부분 
 	cout << "당신의 앞에는 버려진 무기가 있습니다." << endl;
 	cout << "그무기는 무엇입니까?" << endl;	
-	cout << "1. 낡은 장검　　2. 낡은 양손도끼" << endl;
+	cout << "※ 한번 선택한 무기는 타입을 변경할수 없습니다." << endl << endl;
+	cout << "1. 낡은 장검 : 장검류는 근접공격력과 근접방어가 준수하게 배분되어있습니다." << endl << endl;
+	cout << "2. 낡은 양손도끼 : 도끼류는 높은 근접공격과 낮은 근접방어력을 가지고 있습니다." << endl;
 	int iChoice = Choice_Event(2);
 	
 	// 검 과 도끼 딜레마 
 	if(iChoice == 1)
+	{
 		Player.iEquip_Weapon(Oid_Sword);
-	else Player.iEquip_Weapon(Oid_Axe);	
+		Player.iP_Skill->Set_Weapon_Style(1);
+		Player.iP_Skill->Set_Skill(1);	//
+		Player.iP_Skill->Set_Skill(2);	//
+	}
+	else
+	{
+		Player.iEquip_Weapon(Oid_Axe);	
+		Player.iP_Skill->Set_Weapon_Style(2);
+	}
 	
 	// EVENT 2. 처음전투 를 시작한다  
+	system("cls");
+	cout << "당신은 걸어가던중 도적과 마주첫습니다." << endl;
+	cout << "적은 혼자인듯 합니다." << endl;
+	cout << endl << "※ 전투모드로 돌입!" << endl;
+	getch();
 	Combat(&Player, Bandit);	// 도적과 전투 
 	
 	return 0;
